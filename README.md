@@ -19,7 +19,7 @@ This portfolio was developed to provide a central platform for presenting my sof
 
 The portfolio is hosted on **Vercel** and connected to the GitHub repository for deployment.
 
-**Live Portfolio:** `YOUR-VERCEL-URL`
+**Live Portfolio:** `(https://portfolio-vijayjg.vercel.app/)`
 
 **GitHub Repository:**
 https://github.com/vijayJG/new-portfolio

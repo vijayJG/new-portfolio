@@ -1,0 +1,1870 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vijayabalan J | Cloud, DevOps &amp; Cybersecurity Engineer</title>
+  <meta name="description" content="Portfolio of Vijayabalan J — Computer Science Engineer focused on cloud infrastructure, DevOps, cybersecurity, Linux systems, automation, and backend development." />
+  <meta property="og:title" content="Vijayabalan J | Cloud, DevOps &amp; Cybersecurity Engineer" />
+  <meta property="og:description" content="Portfolio of Vijayabalan J — Computer Science Engineer focused on cloud infrastructure, DevOps, cybersecurity, Linux systems, automation, and backend development." />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg-base:    #0a0c10;
+      --bg-surface: #0f1218;
+      --bg-card:    #13181f;
+      --bg-card2:   #161c25;
+      --border:     rgba(99,182,255,0.10);
+      --border-m:   rgba(99,182,255,0.18);
+      --accent:     #4a9eff;
+      --accent-dim: rgba(74,158,255,0.15);
+      --accent-dim2:rgba(74,158,255,0.08);
+      --cyan:       #22d3ee;
+      --cyan-dim:   rgba(34,211,238,0.12);
+      --text-1:     #e8ecf0;
+      --text-2:     #8b9ab0;
+      --text-3:     #5a6880;
+      --mono:       'JetBrains Mono', monospace;
+      --sans:       'Inter', system-ui, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg-base);
+      color: var(--text-1);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* CANVAS NETWORK BACKGROUND */
+    #networkCanvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 1;
+    }
+
+    /* ─── SCROLLBAR ─── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--bg-base); }
+    ::-webkit-scrollbar-thumb { background: var(--border-m); border-radius: 3px; }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 5%;
+      background: rgba(10,12,16,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-brand {
+      font-family: var(--mono);
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--text-1);
+      letter-spacing: 0.01em;
+      text-decoration: none;
+    }
+    .nav-brand span { color: var(--accent); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.8rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      font-weight: 500;
+      color: var(--text-2);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--text-1); }
+
+    .btn-connect {
+      font-size: 0.78rem;
+      font-weight: 600;
+      padding: 0.42rem 1rem;
+      border: 1px solid var(--border-m);
+      border-radius: 5px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.04em;
+      transition: background 0.2s, border-color 0.2s;
+    }
+    .btn-connect:hover {
+      background: var(--accent-dim);
+      border-color: var(--accent);
+    }
+
+    /* mobile nav */
+    .nav-toggle { display: none; cursor: pointer; background: none; border: none; padding: 4px; }
+    .nav-toggle span {
+      display: block; width: 22px; height: 2px;
+      background: var(--text-2); margin: 4px 0;
+      transition: transform 0.2s, opacity 0.2s;
+    }
+
+    /* ─── MAIN ─── */
+    main { position: relative; z-index: 1; }
+    section { padding: 90px 5%; }
+    .container { max-width: 1100px; margin: 0 auto; }
+
+    /* ─── LABELS ─── */
+    .section-label {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .section-label::after {
+      content: '';
+      display: block;
+      flex: 1;
+      max-width: 60px;
+      height: 1px;
+      background: var(--accent);
+      opacity: 0.4;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3.5vw, 2.4rem);
+      font-weight: 700;
+      color: var(--text-1);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 1.2rem;
+    }
+
+    .section-sub {
+      font-size: 1rem;
+      color: var(--text-2);
+      max-width: 600px;
+      line-height: 1.7;
+    }
+
+    /* ─── HERO ─── */
+    #hero {
+      min-height: 100vh;
+      padding-top: 100px;
+      display: flex;
+      align-items: center;
+    }
+
+    .hero-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+
+    .hero-eyebrow {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.14em;
+      margin-bottom: 1.2rem;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.7); }
+    }
+
+    .hero-h1 {
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      color: var(--text-1);
+      margin-bottom: 1.4rem;
+    }
+
+    .hero-p {
+      font-size: 1rem;
+      color: var(--text-2);
+      line-height: 1.75;
+      margin-bottom: 2rem;
+      max-width: 500px;
+    }
+
+    .hero-actions { display: flex; gap: 0.9rem; flex-wrap: wrap; margin-bottom: 2rem; }
+
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.7rem 1.4rem;
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.87rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.7rem 1.4rem;
+      border: 1px solid var(--border-m);
+      color: var(--text-1);
+      font-size: 0.87rem;
+      font-weight: 600;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: border-color 0.2s, background 0.2s, transform 0.15s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); background: var(--accent-dim); transform: translateY(-1px); }
+
+    .hero-status {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      color: var(--text-3);
+    }
+    .status-dot {
+      width: 7px; height: 7px; border-radius: 50%;
+      background: #22c55e;
+      box-shadow: 0 0 0 3px rgba(34,197,94,0.2);
+      animation: pulse-dot 2.5s ease-in-out infinite;
+    }
+
+    /* ─── INFRA DIAGRAM (SVG hero visual) ─── */
+    .hero-visual {
+      display: flex; justify-content: center; align-items: center;
+    }
+
+    .infra-svg { width: 100%; max-width: 430px; }
+
+    /* ─── METRICS ─── */
+    #metrics {
+      padding: 0 5% 70px;
+    }
+    .metrics-strip {
+      max-width: 1100px; margin: 0 auto;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--border);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .metric-cell {
+      background: var(--bg-card);
+      padding: 1.6rem 1.8rem;
+      display: flex; flex-direction: column; gap: 0.3rem;
+    }
+    .metric-num {
+      font-family: var(--mono);
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -0.02em;
+    }
+    .metric-label {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-1);
+    }
+    .metric-sub {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--text-3);
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--bg-surface); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      font-size: 0.97rem;
+      color: var(--text-2);
+      line-height: 1.8;
+      margin-bottom: 1.2rem;
+    }
+    .enjoys-list {
+      list-style: none;
+      display: flex; flex-direction: column; gap: 0.55rem;
+      margin-top: 0.5rem;
+    }
+    .enjoys-list li {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-size: 0.88rem; color: var(--text-2);
+    }
+    .enjoys-list li::before {
+      content: '';
+      display: block; width: 5px; height: 5px;
+      background: var(--accent); border-radius: 50%; flex-shrink: 0;
+    }
+    .about-sidebar {
+      display: flex; flex-direction: column; gap: 1.2rem;
+    }
+    .info-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+    .info-card h4 {
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+    .info-row {
+      display: flex; justify-content: space-between;
+      font-size: 0.84rem; color: var(--text-2);
+      padding: 0.3rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .info-row:last-child { border-bottom: none; }
+    .info-row span:last-child { color: var(--text-1); font-weight: 500; }
+
+    /* ─── SKILLS ─── */
+    #skills { }
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 1.4rem;
+      margin-top: 2.5rem;
+    }
+    .skill-group {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+    }
+    .skill-group-title {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      color: var(--accent);
+      letter-spacing: 0.12em;
+      margin-bottom: 1rem;
+      padding-bottom: 0.6rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .skill-tags {
+      display: flex; flex-wrap: wrap; gap: 0.45rem;
+    }
+    .skill-tag {
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      font-weight: 500;
+      padding: 0.28rem 0.65rem;
+      border: 1px solid var(--border-m);
+      border-radius: 4px;
+      color: var(--text-2);
+      background: var(--accent-dim2);
+      transition: border-color 0.2s, color 0.2s, background 0.2s;
+      cursor: default;
+    }
+    .skill-tag:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-dim);
+    }
+
+    /* ─── PROJECTS ─── */
+    #projects { background: var(--bg-surface); }
+    .projects-list { display: flex; flex-direction: column; gap: 2rem; margin-top: 2.5rem; }
+
+    .project-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: border-color 0.25s, transform 0.2s;
+      cursor: pointer;
+    }
+    .project-card:hover {
+      border-color: var(--border-m);
+      transform: translateY(-2px);
+    }
+    .project-card.featured { border-color: rgba(74,158,255,0.22); }
+
+    .project-inner {
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      min-height: 260px;
+    }
+
+    .project-content { padding: 2rem 2rem 2rem; display: flex; flex-direction: column; gap: 1rem; }
+
+    .project-badge {
+      font-family: var(--mono);
+      font-size: 0.66rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      color: var(--accent);
+      background: var(--accent-dim);
+      border: 1px solid rgba(74,158,255,0.2);
+      border-radius: 4px;
+      padding: 0.22rem 0.6rem;
+      display: inline-block;
+      width: fit-content;
+    }
+    .project-badge.security { color: var(--cyan); background: var(--cyan-dim); border-color: rgba(34,211,238,0.2); }
+    .project-badge.linux { color: #a78bfa; background: rgba(167,139,250,0.1); border-color: rgba(167,139,250,0.2); }
+
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--text-1);
+      letter-spacing: -0.01em;
+    }
+    .project-sub { font-size: 0.83rem; color: var(--accent); font-family: var(--mono); margin-top: -0.5rem; }
+    .project-desc { font-size: 0.92rem; color: var(--text-2); line-height: 1.7; }
+
+    .project-achievements {
+      list-style: none; display: flex; flex-direction: column; gap: 0.4rem;
+    }
+    .project-achievements li {
+      font-size: 0.83rem; color: var(--text-2);
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .project-achievements li::before {
+      content: '›'; color: var(--accent); font-weight: 700;
+      flex-shrink: 0; margin-top: 0.02em;
+    }
+
+    .project-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+    .tech-chip {
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      padding: 0.2rem 0.55rem;
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      color: var(--text-3);
+    }
+
+    .project-actions { display: flex; gap: 0.7rem; margin-top: 0.5rem; }
+    .btn-sm {
+      display: inline-flex; align-items: center; gap: 0.35rem;
+      padding: 0.5rem 1rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      border-radius: 5px;
+      text-decoration: none;
+      transition: all 0.2s;
+    }
+    .btn-sm.primary { background: var(--accent); color: #fff; }
+    .btn-sm.primary:hover { opacity: 0.85; }
+    .btn-sm.outline {
+      border: 1px solid var(--border-m);
+      color: var(--text-2);
+    }
+    .btn-sm.outline:hover { border-color: var(--accent); color: var(--accent); background: var(--accent-dim); }
+
+    /* ARCH DIAGRAMS */
+    .project-arch {
+      background: var(--bg-card2);
+      border-left: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: center;
+      padding: 1.5rem;
+    }
+
+    .arch-diagram {
+      display: flex; flex-direction: column; align-items: center;
+      gap: 0; font-family: var(--mono); font-size: 0.72rem;
+    }
+    .arch-node {
+      background: var(--bg-card);
+      border: 1px solid var(--border-m);
+      border-radius: 6px;
+      padding: 0.4rem 0.9rem;
+      color: var(--text-2);
+      text-align: center;
+      transition: border-color 0.2s;
+      white-space: nowrap;
+    }
+    .arch-node.highlight { border-color: var(--accent); color: var(--accent); }
+    .arch-node.security-node { border-color: var(--cyan); color: var(--cyan); }
+    .arch-node.linux-node { border-color: #a78bfa; color: #a78bfa; }
+    .arch-arrow {
+      color: var(--text-3); font-size: 0.8rem;
+      display: flex; align-items: center; justify-content: center;
+      height: 20px;
+    }
+    .arch-branch {
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .arch-branch-col { display: flex; flex-direction: column; align-items: center; gap: 0; }
+
+    .arch-layer-label {
+      font-size: 0.6rem;
+      color: var(--text-3);
+      letter-spacing: 0.08em;
+      margin-bottom: 0.3rem;
+    }
+    .arch-iac-bar {
+      display: flex; align-items: center; gap: 0.5rem;
+      font-size: 0.65rem; color: var(--text-3);
+      border-left: 2px solid var(--accent);
+      padding: 0.4rem 0.6rem;
+      background: var(--accent-dim2);
+      border-radius: 0 4px 4px 0;
+      margin-bottom: 0.6rem;
+      width: 100%;
+    }
+
+    /* ─── PROCESS ─── */
+    #process { }
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 0;
+      margin-top: 2.5rem;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    .process-step {
+      padding: 1.4rem 1.2rem;
+      background: var(--bg-card);
+      border-right: 1px solid var(--border);
+      display: flex; flex-direction: column; gap: 0.7rem;
+      position: relative;
+    }
+    .process-step:last-child { border-right: none; }
+    .step-num {
+      font-family: var(--mono);
+      font-size: 0.62rem;
+      color: var(--accent);
+      letter-spacing: 0.08em;
+    }
+    .step-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text-1);
+    }
+    .step-desc {
+      font-size: 0.79rem;
+      color: var(--text-3);
+      line-height: 1.6;
+    }
+    .step-connector {
+      position: absolute;
+      right: -8px; top: 50%;
+      transform: translateY(-50%);
+      width: 16px; height: 16px;
+      background: var(--bg-base);
+      border: 1px solid var(--border-m);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.6rem;
+      color: var(--accent);
+      z-index: 2;
+    }
+
+    /* ─── EDUCATION ─── */
+    #education { background: var(--bg-surface); }
+    .edu-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.8rem 2rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 2rem;
+      max-width: 780px;
+      margin-top: 2rem;
+    }
+    .edu-degree {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text-1);
+      margin-bottom: 0.3rem;
+    }
+    .edu-school { font-size: 0.9rem; color: var(--text-2); margin-bottom: 0.2rem; }
+    .edu-date { font-family: var(--mono); font-size: 0.72rem; color: var(--text-3); margin-bottom: 0.8rem; }
+    .edu-coursework { font-size: 0.82rem; color: var(--text-3); }
+    .edu-coursework strong { color: var(--text-2); }
+    .edu-cgpa {
+      text-align: right; flex-shrink: 0;
+    }
+    .cgpa-num {
+      font-family: var(--mono);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 0.2rem;
+    }
+    .cgpa-label { font-size: 0.72rem; color: var(--text-3); }
+
+    /* ─── CERTIFICATIONS ─── */
+    #certifications { }
+    .certs-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.2rem;
+      margin-top: 2rem;
+    }
+    .cert-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.4rem;
+      transition: border-color 0.2s;
+    }
+    .cert-card:hover { border-color: var(--border-m); }
+    .cert-issuer {
+      font-family: var(--mono);
+      font-size: 0.65rem;
+      color: var(--accent);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.6rem;
+    }
+    .cert-name {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-1);
+      margin-bottom: 0.3rem;
+    }
+    .cert-year { font-family: var(--mono); font-size: 0.72rem; color: var(--text-3); }
+
+    /* ─── EXPERIENCE / PRACTICAL ─── */
+    #experience { background: var(--bg-surface); }
+    .practical-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    .practical-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.2rem;
+    }
+    .practical-item-title {
+      font-size: 0.88rem; font-weight: 600; color: var(--text-1); margin-bottom: 0.4rem;
+    }
+    .practical-item-desc { font-size: 0.8rem; color: var(--text-3); line-height: 1.6; }
+
+    /* ─── GITHUB ─── */
+    #github { }
+    .github-inner {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 2rem;
+    }
+    .github-text p { font-size: 0.95rem; color: var(--text-2); line-height: 1.7; max-width: 520px; }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--bg-surface); }
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      margin-top: 2rem;
+    }
+    .contact-info { display: flex; flex-direction: column; gap: 1.2rem; }
+    .contact-link {
+      display: flex; align-items: center; gap: 0.9rem;
+      font-size: 0.9rem; color: var(--text-2);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-link:hover { color: var(--accent); }
+    .contact-icon {
+      width: 36px; height: 36px;
+      border: 1px solid var(--border-m);
+      border-radius: 7px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.85rem;
+    }
+
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-label {
+      font-family: var(--mono); font-size: 0.7rem; color: var(--text-3); letter-spacing: 0.08em;
+    }
+    .form-input, .form-textarea {
+      background: var(--bg-card);
+      border: 1px solid var(--border-m);
+      border-radius: 6px;
+      padding: 0.7rem 0.9rem;
+      color: var(--text-1);
+      font-family: var(--sans);
+      font-size: 0.88rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .form-input:focus, .form-textarea:focus { border-color: var(--accent); }
+    .form-textarea { min-height: 110px; resize: vertical; }
+    .form-notice {
+      font-size: 0.74rem;
+      color: var(--text-3);
+      font-family: var(--mono);
+      margin-top: 0.2rem;
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.2rem 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: relative; z-index: 1;
+    }
+    .footer-brand {
+      font-family: var(--mono); font-size: 0.82rem; color: var(--text-1);
+    }
+    .footer-sub { font-size: 0.72rem; color: var(--text-3); margin-top: 0.2rem; }
+    .footer-links { display: flex; gap: 1.2rem; }
+    .footer-links a {
+      font-size: 0.82rem; color: var(--text-3); text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--accent); }
+    .footer-copy { font-size: 0.74rem; color: var(--text-3); }
+
+    /* ─── MODAL ─── */
+    .modal-overlay {
+      position: fixed; inset: 0; z-index: 200;
+      background: rgba(0,0,0,0.85);
+      backdrop-filter: blur(4px);
+      display: flex; align-items: flex-start; justify-content: center;
+      padding: 3% 4%;
+      overflow-y: auto;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.2s;
+    }
+    .modal-overlay.open { opacity: 1; pointer-events: all; }
+    .modal-box {
+      background: var(--bg-card);
+      border: 1px solid var(--border-m);
+      border-radius: 14px;
+      width: 100%; max-width: 840px;
+      padding: 2.5rem;
+      position: relative;
+      transform: translateY(10px);
+      transition: transform 0.2s;
+    }
+    .modal-overlay.open .modal-box { transform: translateY(0); }
+    .modal-close {
+      position: absolute; top: 1.2rem; right: 1.2rem;
+      background: none; border: none; cursor: pointer;
+      color: var(--text-3); font-size: 1.2rem;
+      width: 32px; height: 32px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 50%; border: 1px solid var(--border);
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .modal-close:hover { color: var(--text-1); border-color: var(--border-m); }
+    .modal-section { margin-bottom: 1.8rem; }
+    .modal-section-title {
+      font-family: var(--mono); font-size: 0.7rem; color: var(--accent);
+      letter-spacing: 0.1em; margin-bottom: 0.7rem;
+      padding-bottom: 0.4rem; border-bottom: 1px solid var(--border);
+    }
+    .modal-section p { font-size: 0.9rem; color: var(--text-2); line-height: 1.75; margin-bottom: 0.6rem; }
+    .modal-list { list-style: none; display: flex; flex-direction: column; gap: 0.4rem; }
+    .modal-list li {
+      font-size: 0.87rem; color: var(--text-2);
+      display: flex; gap: 0.6rem; align-items: flex-start;
+    }
+    .modal-list li::before { content: '›'; color: var(--accent); font-weight: 700; flex-shrink: 0; }
+
+    /* ─── SCROLL REVEAL ─── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .reveal { opacity: 1; transform: none; }
+    }
+
+    /* ─── MOBILE NAV ─── */
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; gap: 0; position: absolute; top: 60px; left: 0; right: 0; background: var(--bg-base); border-bottom: 1px solid var(--border); padding: 1rem 5%; }
+      .nav-links.open { display: flex; }
+      .nav-links a { padding: 0.6rem 0; font-size: 0.9rem; border-bottom: 1px solid var(--border); }
+      .btn-connect { display: none; }
+      .nav-toggle { display: block; }
+
+      .hero-inner { grid-template-columns: 1fr; text-align: center; }
+      .hero-eyebrow, .hero-status { justify-content: center; }
+      .hero-actions { justify-content: center; }
+      .hero-p { margin: 0 auto 2rem; }
+      .hero-visual { display: none; }
+
+      .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+
+      .about-grid { grid-template-columns: 1fr; }
+      .about-sidebar { order: -1; }
+
+      .skills-grid { grid-template-columns: 1fr 1fr; }
+
+      .project-inner { grid-template-columns: 1fr; }
+      .project-arch { border-left: none; border-top: 1px solid var(--border); }
+
+      .process-steps { grid-template-columns: repeat(2, 1fr); }
+      .process-step { border-right: none; border-bottom: 1px solid var(--border); }
+      .step-connector { display: none; }
+
+      .certs-grid { grid-template-columns: 1fr; }
+      .practical-grid { grid-template-columns: 1fr 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .edu-card { flex-direction: column; }
+      .edu-cgpa { text-align: left; }
+
+      .github-inner { flex-direction: column; align-items: flex-start; }
+
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+    }
+
+    @media (max-width: 480px) {
+      section { padding: 70px 4%; }
+      .metrics-strip { grid-template-columns: 1fr 1fr; }
+      .skills-grid { grid-template-columns: 1fr; }
+      .practical-grid { grid-template-columns: 1fr; }
+      .process-steps { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="networkCanvas" aria-hidden="true"></canvas>
+
+<!-- ─── NAV ─── -->
+<nav role="navigation" aria-label="Main navigation">
+  <a href="#hero" class="nav-brand">Vijayabalan<span>.</span>J</a>
+
+  <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation" aria-expanded="false">
+    <span></span><span></span><span></span>
+  </button>
+
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#process">Approach</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#certifications">Certifications</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="btn-connect">Let's Connect</a></li>
+  </ul>
+</nav>
+
+<main>
+
+<!-- ─── HERO ─── -->
+<section id="hero">
+  <div class="hero-inner container">
+    <div class="hero-left">
+      <div class="hero-eyebrow">COMPUTER SCIENCE ENGINEER · CLOUD · DEVOPS · CYBERSECURITY</div>
+      <h1 class="hero-h1">Building secure infrastructure, automation, and practical systems.</h1>
+      <p class="hero-p">Computer Science and Engineering graduate with hands-on experience building cloud infrastructure, cybersecurity labs, Linux systems, and backend applications. I enjoy turning technical concepts into working systems that can be deployed, monitored, secured, and maintained.</p>
+      <div class="hero-actions">
+        <a href="#projects" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="7 17 17 7"/><polyline points="7 7 17 7 17 17"/></svg>
+          View My Work
+        </a>
+        <a href="https://github.com/VijayJG" target="_blank" rel="noopener" class="btn-ghost">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          GitHub
+        </a>
+      </div>
+      <div class="hero-status">
+        <span class="status-dot"></span>
+        Open to Opportunities
+      </div>
+    </div>
+
+    <!-- Infrastructure Visualization SVG -->
+    <div class="hero-visual" aria-hidden="true">
+      <svg class="infra-svg" viewBox="0 0 420 480" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <filter id="glow">
+            <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
+          <style>
+            .node-box { fill: #13181f; stroke: rgba(74,158,255,0.3); stroke-width: 1; rx: 6; }
+            .node-box.s { stroke: rgba(34,211,238,0.3); }
+            .node-text { fill: #8b9ab0; font-family: 'JetBrains Mono', monospace; font-size: 9px; }
+            .node-label { fill: #4a9eff; font-family: 'JetBrains Mono', monospace; font-size: 8px; }
+            .node-label.s { fill: #22d3ee; }
+            .conn-line { stroke: rgba(74,158,255,0.2); stroke-width: 1; fill: none; }
+            .conn-line.s { stroke: rgba(34,211,238,0.18); }
+            @keyframes flow { 0%{stroke-dashoffset:20} 100%{stroke-dashoffset:0} }
+            .flow-line { stroke-dasharray: 4 6; animation: flow 1.5s linear infinite; }
+            .flow-line.s { stroke: rgba(34,211,238,0.4); animation-duration: 2s; }
+            .flow-line.a { stroke: rgba(74,158,255,0.4); }
+          </style>
+          <marker id="arr" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="rgba(74,158,255,0.4)"/>
+          </marker>
+          <marker id="arrs" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+            <path d="M0,0 L6,3 L0,6 Z" fill="rgba(34,211,238,0.4)"/>
+          </marker>
+        </defs>
+
+        <!-- IaC Label -->
+        <rect x="10" y="8" width="108" height="18" rx="3" fill="rgba(74,158,255,0.08)" stroke="rgba(74,158,255,0.2)" stroke-width="1"/>
+        <text x="18" y="20" class="node-label" font-size="7.5">Terraform  ·  IaC</text>
+
+        <!-- INTERNET -->
+        <rect x="155" y="30" width="110" height="30" rx="6" class="node-box"/>
+        <text x="210" y="48" text-anchor="middle" class="node-text">Internet</text>
+
+        <!-- Arrow to ALB -->
+        <line x1="210" y1="60" x2="210" y2="80" class="conn-line flow-line a" marker-end="url(#arr)"/>
+
+        <!-- ALB -->
+        <rect x="120" y="82" width="180" height="34" rx="6" class="node-box"/>
+        <text x="210" y="95" text-anchor="middle" class="node-label" font-size="7">APPLICATION LOAD BALANCER</text>
+        <text x="210" y="107" text-anchor="middle" class="node-text">ap-south-1  ·  Multi-AZ</text>
+
+        <!-- Arrow to ASG -->
+        <line x1="210" y1="116" x2="210" y2="136" class="conn-line flow-line a" marker-end="url(#arr)"/>
+
+        <!-- ASG -->
+        <rect x="120" y="138" width="180" height="30" rx="6" class="node-box"/>
+        <text x="210" y="150" text-anchor="middle" class="node-label" font-size="7">AUTO SCALING GROUP</text>
+        <text x="210" y="161" text-anchor="middle" class="node-text">Launch Template  ·  Scale Policy</text>
+
+        <!-- Branch to EC2s -->
+        <line x1="150" y1="168" x2="100" y2="196" class="conn-line flow-line a" marker-end="url(#arr)"/>
+        <line x1="270" y1="168" x2="320" y2="196" class="conn-line flow-line a" marker-end="url(#arr)"/>
+
+        <!-- EC2 A -->
+        <rect x="50" y="198" width="100" height="34" rx="6" class="node-box"/>
+        <text x="100" y="211" text-anchor="middle" class="node-label" font-size="7">EC2  ·  ap-south-1a</text>
+        <text x="100" y="223" text-anchor="middle" class="node-text">Flask  ·  systemd</text>
+
+        <!-- EC2 B -->
+        <rect x="270" y="198" width="100" height="34" rx="6" class="node-box"/>
+        <text x="320" y="211" text-anchor="middle" class="node-label" font-size="7">EC2  ·  ap-south-1b</text>
+        <text x="320" y="223" text-anchor="middle" class="node-text">Flask  ·  systemd</text>
+
+        <!-- Python Monitor -->
+        <rect x="148" y="248" width="125" height="30" rx="6" fill="rgba(74,158,255,0.05)" stroke="rgba(74,158,255,0.15)" stroke-width="1" stroke-dasharray="4 3"/>
+        <text x="210" y="260" text-anchor="middle" class="node-label" font-size="7">Python / Boto3</text>
+        <text x="210" y="271" text-anchor="middle" class="node-text">Infra Monitor</text>
+
+        <!-- Divider -->
+        <line x1="20" y1="300" x2="400" y2="300" stroke="rgba(99,182,255,0.07)" stroke-width="1"/>
+
+        <!-- SOC Section label -->
+        <rect x="10" y="308" width="98" height="18" rx="3" fill="rgba(34,211,238,0.07)" stroke="rgba(34,211,238,0.2)" stroke-width="1"/>
+        <text x="18" y="320" class="node-label s" font-size="7.5">SOC Lab  ·  SIEM</text>
+
+        <!-- Windows Endpoint -->
+        <rect x="148" y="332" width="124" height="30" rx="6" class="node-box s"/>
+        <text x="210" y="344" text-anchor="middle" class="node-label s" font-size="7">WINDOWS ENDPOINT</text>
+        <text x="210" y="355" text-anchor="middle" class="node-text">Wazuh Agent</text>
+
+        <!-- Arrow -->
+        <line x1="210" y1="362" x2="210" y2="380" class="conn-line flow-line s" marker-end="url(#arrs)"/>
+
+        <!-- Wazuh Manager -->
+        <rect x="134" y="382" width="152" height="30" rx="6" class="node-box s"/>
+        <text x="210" y="394" text-anchor="middle" class="node-label s" font-size="7">WAZUH MANAGER</text>
+        <text x="210" y="406" text-anchor="middle" class="node-text">Ubuntu  ·  FIM  ·  XDR</text>
+
+        <!-- Arrow -->
+        <line x1="210" y1="412" x2="210" y2="430" class="conn-line flow-line s" marker-end="url(#arrs)"/>
+
+        <!-- AI Analysis -->
+        <rect x="140" y="432" width="140" height="34" rx="6" class="node-box s"/>
+        <text x="210" y="444" text-anchor="middle" class="node-label s" font-size="7">AI SOC ENGINE</text>
+        <text x="210" y="456" text-anchor="middle" class="node-text">Llama 3.1 8B  ·  Ollama</text>
+
+        <!-- Subtle pulse circles on EC2 nodes -->
+        <circle cx="100" cy="215" r="42" fill="none" stroke="rgba(74,158,255,0.04)" stroke-width="1">
+          <animate attributeName="r" values="36;44;36" dur="3s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.6;0;0.6" dur="3s" repeatCount="indefinite"/>
+        </circle>
+        <circle cx="210" cy="449" r="50" fill="none" stroke="rgba(34,211,238,0.04)" stroke-width="1">
+          <animate attributeName="r" values="44;54;44" dur="3.5s" repeatCount="indefinite"/>
+          <animate attributeName="opacity" values="0.5;0;0.5" dur="3.5s" repeatCount="indefinite"/>
+        </circle>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ─── METRICS ─── -->
+<div id="metrics">
+  <div class="metrics-strip reveal">
+    <div class="metric-cell">
+      <div class="metric-num">15+</div>
+      <div class="metric-label">AWS Resources</div>
+      <div class="metric-sub">Provisioned via Terraform</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-num">Multi-AZ</div>
+      <div class="metric-label">Infrastructure</div>
+      <div class="metric-sub">AWS ap-south-1a / 1b</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-num">SOC Lab</div>
+      <div class="metric-label">Security Environment</div>
+      <div class="metric-sub">Wazuh + Windows + Ubuntu</div>
+    </div>
+    <div class="metric-cell">
+      <div class="metric-num">3</div>
+      <div class="metric-label">Core Projects</div>
+      <div class="metric-sub">Cloud · Security · Systems</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── ABOUT ─── -->
+<section id="about">
+  <div class="container">
+    <div class="section-label">ABOUT</div>
+    <h2 class="section-title">Engineering with a systems mindset.</h2>
+    <div class="about-grid reveal">
+      <div class="about-text">
+        <p>I'm Vijayabalan J, a Computer Science and Engineering graduate interested in cloud infrastructure, DevOps, cybersecurity, Linux administration, and backend development.</p>
+        <p>My approach is hands-on: instead of only learning technologies individually, I try to combine them into working systems. From provisioning AWS infrastructure with Terraform and automating EC2 deployments to building a Wazuh-based security operations lab and managing a self-hosted Linux server, my projects focus on understanding how systems behave in real environments.</p>
+        <p>I'm particularly interested in opportunities where I can work with cloud infrastructure, security operations, DevOps automation, Linux systems, or backend engineering while continuing to deepen my technical skills.</p>
+
+        <div style="margin-top:1.4rem;">
+          <p style="font-size:0.8rem;color:var(--text-3);letter-spacing:0.08em;font-family:var(--mono);margin-bottom:0.8rem;">WHAT I ENJOY BUILDING</p>
+          <ul class="enjoys-list">
+            <li>Cloud infrastructure and IaC automation</li>
+            <li>Security monitoring environments</li>
+            <li>Linux systems and self-hosted services</li>
+            <li>Backend services and REST APIs</li>
+            <li>Infrastructure observability tooling</li>
+            <li>Reproducible, documented technical systems</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="about-sidebar">
+        <div class="info-card">
+          <h4>CONTACT</h4>
+          <div class="info-row"><span>Location</span><span>Chennai, India</span></div>
+          <div class="info-row"><span>Email</span><span>vijayjayagopan@gmail.com</span></div>
+          <div class="info-row"><span>GitHub</span><span>VijayJG</span></div>
+          <div class="info-row"><span>LinkedIn</span><span>vijayabalan-j</span></div>
+        </div>
+        <div class="info-card">
+          <h4>FOCUS AREAS</h4>
+          <div class="info-row"><span>Primary</span><span>Cloud Infrastructure</span></div>
+          <div class="info-row"><span>Secondary</span><span>Cybersecurity / SOC</span></div>
+          <div class="info-row"><span>Adjacent</span><span>Linux · DevOps · Backend</span></div>
+          <div class="info-row"><span>IaC</span><span>Terraform</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── SKILLS ─── -->
+<section id="skills">
+  <div class="container">
+    <div class="section-label">TECHNICAL SKILLS</div>
+    <h2 class="section-title">Tools and technologies I work with.</h2>
+    <div class="skills-grid reveal">
+      <div class="skill-group">
+        <div class="skill-group-title">LANGUAGES</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Python</span>
+          <span class="skill-tag">Java</span>
+          <span class="skill-tag">Bash</span>
+          <span class="skill-tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">CLOUD & INFRASTRUCTURE</div>
+        <div class="skill-tags">
+          <span class="skill-tag">AWS</span>
+          <span class="skill-tag">EC2</span>
+          <span class="skill-tag">VPC</span>
+          <span class="skill-tag">ALB</span>
+          <span class="skill-tag">Auto Scaling</span>
+          <span class="skill-tag">IAM</span>
+          <span class="skill-tag">Terraform</span>
+          <span class="skill-tag">Docker</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">CYBERSECURITY</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Wazuh</span>
+          <span class="skill-tag">SIEM</span>
+          <span class="skill-tag">XDR</span>
+          <span class="skill-tag">FIM</span>
+          <span class="skill-tag">Wireshark</span>
+          <span class="skill-tag">Nmap</span>
+          <span class="skill-tag">Endpoint Security</span>
+          <span class="skill-tag">Threat Detection</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">OPERATING SYSTEMS</div>
+        <div class="skill-tags">
+          <span class="skill-tag">Linux</span>
+          <span class="skill-tag">Arch Linux</span>
+          <span class="skill-tag">Kali Linux</span>
+          <span class="skill-tag">Ubuntu</span>
+          <span class="skill-tag">TrueNAS</span>
+          <span class="skill-tag">Windows 10/11</span>
+          <span class="skill-tag">macOS</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">DEVELOPMENT</div>
+        <div class="skill-tags">
+          <span class="skill-tag">REST APIs</span>
+          <span class="skill-tag">Spring Data JPA</span>
+          <span class="skill-tag">Boto3</span>
+          <span class="skill-tag">Flask</span>
+          <span class="skill-tag">Postman</span>
+          <span class="skill-tag">Git</span>
+          <span class="skill-tag">GitHub</span>
+        </div>
+      </div>
+      <div class="skill-group">
+        <div class="skill-group-title">TOOLS & AUTOMATION</div>
+        <div class="skill-tags">
+          <span class="skill-tag">cloud-init</span>
+          <span class="skill-tag">UserData</span>
+          <span class="skill-tag">systemd</span>
+          <span class="skill-tag">Ollama</span>
+          <span class="skill-tag">VMware</span>
+          <span class="skill-tag">Nextcloud</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROJECTS ─── -->
+<section id="projects">
+  <div class="container">
+    <div class="section-label">PROJECTS</div>
+    <h2 class="section-title">Projects that demonstrate how I build.</h2>
+    <p class="section-sub">Each project represents a working system — designed, implemented, and documented independently.</p>
+
+    <div class="projects-list">
+
+      <!-- PROJECT 1 -->
+      <article class="project-card featured reveal" onclick="openModal('aws')" tabindex="0" role="button" aria-label="View AWS Infrastructure project details">
+        <div class="project-inner">
+          <div class="project-content">
+            <span class="project-badge">CLOUD · DEVOPS · INFRASTRUCTURE AS CODE</span>
+            <h3 class="project-title">Auto-Scaling Web Infrastructure on AWS</h3>
+            <p class="project-desc">Production-style AWS infrastructure designed around Infrastructure as Code, high availability, automated provisioning, and infrastructure monitoring. Built entirely with Terraform — no console clicking.</p>
+            <ul class="project-achievements">
+              <li>Provisioned 15 AWS resources using Terraform — VPC, subnets, IGW, ALB, ASG, Launch Template, Security Groups, scaling policy</li>
+              <li>Multi-AZ high availability across ap-south-1a and ap-south-1b with ALB traffic distribution and automatic instance replacement</li>
+              <li>Automated EC2 provisioning with cloud-init/UserData — Python 3, Flask, virtualenv, systemd; instances traffic-ready in ~3 minutes</li>
+              <li>Python/Boto3 monitoring tool using EC2, ASG, and ELBv2 APIs for real-time infrastructure health visibility</li>
+              <li>Dedicated IAM configuration for Terraform — isolating from root access, following least-privilege principle</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-chip">Terraform</span>
+              <span class="tech-chip">AWS</span>
+              <span class="tech-chip">EC2</span>
+              <span class="tech-chip">VPC</span>
+              <span class="tech-chip">ALB</span>
+              <span class="tech-chip">ASG</span>
+              <span class="tech-chip">IAM</span>
+              <span class="tech-chip">Python</span>
+              <span class="tech-chip">Boto3</span>
+              <span class="tech-chip">Flask</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/VijayJG" target="_blank" rel="noopener" class="btn-sm primary" onclick="event.stopPropagation()">
+                View on GitHub
+              </a>
+              <button class="btn-sm outline" onclick="event.stopPropagation(); openModal('aws')">Case Study →</button>
+            </div>
+          </div>
+          <div class="project-arch">
+            <div class="arch-diagram">
+              <div class="arch-iac-bar">⬛ Terraform · Infrastructure as Code</div>
+              <div class="arch-node highlight">Internet</div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-node highlight">Application Load Balancer</div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-node">Target Group</div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-node">Auto Scaling Group</div>
+              <div class="arch-arrow">↙ &nbsp;&nbsp;↘</div>
+              <div class="arch-branch">
+                <div class="arch-branch-col">
+                  <div class="arch-node" style="font-size:0.67rem">EC2  ·  1a<br><span style="color:var(--text-3);font-size:0.6rem">Flask · systemd</span></div>
+                </div>
+                <div style="width:14px"></div>
+                <div class="arch-branch-col">
+                  <div class="arch-node" style="font-size:0.67rem">EC2  ·  1b<br><span style="color:var(--text-3);font-size:0.6rem">Flask · systemd</span></div>
+                </div>
+              </div>
+              <div class="arch-arrow">↓</div>
+              <div class="arch-node" style="border-style:dashed;font-size:0.7rem">Python Monitor · Boto3</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 2 -->
+      <article class="project-card reveal" onclick="openModal('soc')" tabindex="0" role="button" aria-label="View SOC Lab project details">
+        <div class="project-inner">
+          <div class="project-content">
+            <span class="project-badge security">CYBERSECURITY · SIEM · AI</span>
+            <h3 class="project-title">Security Operations Center Lab</h3>
+            <p class="project-sub">Wazuh SIEM + Local AI Integration</p>
+            <p class="project-desc">Hands-on SOC environment built around Wazuh SIEM/XDR, Windows endpoint monitoring, File Integrity Monitoring, and a local LLM pipeline for alert triage — simulating the analyst workflow in a real security operation.</p>
+            <ul class="project-achievements">
+              <li>Deployed Wazuh SIEM/XDR on Ubuntu (VMware) — enterprise-style SOC with real-time endpoint monitoring and threat detection</li>
+              <li>File Integrity Monitoring on critical system directories — detecting and alerting on file creation, modification, and deletion</li>
+              <li>Integrated Llama 3.1 8B via Ollama — automated first-pass alert triage converting raw SIEM events into structured incident summaries</li>
+              <li>Secure bidirectional communication between Wazuh Manager and Windows agent — validating authentication anomalies and integrity violations</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-chip">Wazuh</span>
+              <span class="tech-chip">Ubuntu</span>
+              <span class="tech-chip">Windows</span>
+              <span class="tech-chip">Ollama</span>
+              <span class="tech-chip">Llama 3.1 8B</span>
+              <span class="tech-chip">SIEM</span>
+              <span class="tech-chip">FIM</span>
+              <span class="tech-chip">VMware</span>
+            </div>
+            <div class="project-actions">
+              <a href="https://github.com/VijayJG" target="_blank" rel="noopener" class="btn-sm primary" onclick="event.stopPropagation()">View on GitHub</a>
+              <button class="btn-sm outline" onclick="event.stopPropagation(); openModal('soc')">Case Study →</button>
+            </div>
+          </div>
+          <div class="project-arch">
+            <div class="arch-diagram">
+              <div class="arch-node security-node">Windows Endpoint</div>
+              <div class="arch-arrow" style="color:var(--cyan)">↓</div>
+              <div class="arch-node security-node">Wazuh Agent</div>
+              <div class="arch-arrow" style="color:var(--cyan)">↓</div>
+              <div class="arch-node security-node">Wazuh Manager<br><span style="font-size:0.62rem;color:var(--text-3)">Ubuntu · FIM · XDR</span></div>
+              <div class="arch-arrow" style="color:var(--cyan)">↓</div>
+              <div class="arch-node security-node">Security Events</div>
+              <div class="arch-arrow" style="color:var(--cyan)">↓</div>
+              <div class="arch-node security-node">AI SOC Engine</div>
+              <div class="arch-arrow" style="color:var(--cyan)">↓</div>
+              <div class="arch-node security-node">Llama 3.1 8B · Ollama</div>
+              <div class="arch-arrow" style="color:var(--cyan)">↓</div>
+              <div class="arch-node" style="border-color:rgba(34,211,238,0.2);color:var(--text-2);font-size:0.7rem">Structured Incident Summary</div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <!-- PROJECT 3 -->
+      <article class="project-card reveal" onclick="openModal('homeserver')" tabindex="0" role="button" aria-label="View Home Server project details">
+        <div class="project-inner">
+          <div class="project-content">
+            <span class="project-badge linux">LINUX · SYSTEM ADMINISTRATION · PRIVATE CLOUD</span>
+            <h3 class="project-title">Self-Hosted Home Server</h3>
+            <p class="project-sub">Private Cloud & NAS</p>
+            <p class="project-desc">Linux-based self-hosted infrastructure combining redundant storage, private cloud services, networking, and access management. Built to understand systems administration through direct ownership.</p>
+            <ul class="project-achievements">
+              <li>TrueNAS-based server with RAID storage pools and datasets — redundant private cloud storage without commercial dependency</li>
+              <li>Nextcloud deployment with multi-device file synchronisation, user permissions, access controls, and storage quotas</li>
+              <li>Practical Linux administration: storage pool management, network configuration, service deployment, and user access management</li>
+            </ul>
+            <div class="project-tech">
+              <span class="tech-chip">TrueNAS</span>
+              <span class="tech-chip">Nextcloud</span>
+              <span class="tech-chip">Linux</span>
+              <span class="tech-chip">RAID</span>
+              <span class="tech-chip">LAN Networking</span>
+            </div>
+            <div class="project-actions">
+              <button class="btn-sm primary" onclick="event.stopPropagation(); openModal('homeserver')">View Details</button>
+              <button class="btn-sm outline" onclick="event.stopPropagation(); openModal('homeserver')">Case Study →</button>
+            </div>
+          </div>
+          <div class="project-arch">
+            <div class="arch-diagram">
+              <div class="arch-node linux-node">Devices<br><span style="font-size:0.62rem;color:var(--text-3)">Laptop · Phone · Desktop</span></div>
+              <div class="arch-arrow" style="color:#a78bfa">↓</div>
+              <div class="arch-node linux-node">LAN</div>
+              <div class="arch-arrow" style="color:#a78bfa">↓</div>
+              <div class="arch-node linux-node">TrueNAS Server</div>
+              <div style="height:10px"></div>
+              <div style="display:flex;gap:0.5rem;flex-wrap:wrap;justify-content:center">
+                <div class="arch-node" style="border-color:rgba(167,139,250,0.25);font-size:0.68rem;padding:0.3rem 0.6rem">RAID Storage</div>
+                <div class="arch-node" style="border-color:rgba(167,139,250,0.25);font-size:0.68rem;padding:0.3rem 0.6rem">Nextcloud</div>
+                <div class="arch-node" style="border-color:rgba(167,139,250,0.25);font-size:0.68rem;padding:0.3rem 0.6rem">Users &amp; ACL</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section id="process">
+  <div class="container">
+    <div class="section-label">ENGINEERING APPROACH</div>
+    <h2 class="section-title">How I approach engineering problems.</h2>
+
+    <div class="process-steps reveal">
+      <div class="process-step">
+        <div class="step-num">01</div>
+        <div class="step-title">Understand</div>
+        <div class="step-desc">Map the system, its components, and where it can fail — before writing any code or configuration.</div>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">02</div>
+        <div class="step-title">Design</div>
+        <div class="step-desc">Break the problem into infrastructure, application, networking, and security layers. Identify dependencies.</div>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">03</div>
+        <div class="step-title">Automate</div>
+        <div class="step-desc">Use Terraform, Python, Bash, or cloud-init wherever manual steps can be made reproducible.</div>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">04</div>
+        <div class="step-title">Secure</div>
+        <div class="step-desc">Apply least-privilege IAM, restrict ingress, avoid root access, and validate configurations against intent.</div>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">05</div>
+        <div class="step-title">Monitor</div>
+        <div class="step-desc">Observe system health, events, failures, and security signals — not just whether the service is running.</div>
+        <div class="step-connector">→</div>
+      </div>
+      <div class="process-step">
+        <div class="step-num">06</div>
+        <div class="step-title">Improve</div>
+        <div class="step-desc">Debug systematically, document what was built, and iterate based on what the system reveals.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EDUCATION ─── -->
+<section id="education">
+  <div class="container">
+    <div class="section-label">EDUCATION</div>
+    <h2 class="section-title">Education</h2>
+    <div class="edu-card reveal">
+      <div>
+        <div class="edu-degree">Bachelor of Engineering in Computer Science and Engineering</div>
+        <div class="edu-school">SRM Valliammai Engineering College</div>
+        <div class="edu-date">Nov 2022 – Apr 2026</div>
+        <div class="edu-coursework">
+          <strong>Relevant Coursework:</strong> Data Structures and Algorithms · System Architecture · Networking and Cloud Fundamentals
+        </div>
+      </div>
+      <div class="edu-cgpa">
+        <div class="cgpa-num">7.6</div>
+        <div class="cgpa-label">CGPA</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CERTIFICATIONS ─── -->
+<section id="certifications">
+  <div class="container">
+    <div class="section-label">CERTIFICATIONS</div>
+    <h2 class="section-title">Certifications</h2>
+    <div class="certs-grid reveal">
+      <div class="cert-card">
+        <div class="cert-issuer">AWS SKILLS BUILDER</div>
+        <div class="cert-name">AWS Cloud Practitioner Essentials</div>
+        <div class="cert-year">2026</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">ORACLE</div>
+        <div class="cert-name">Java Foundations</div>
+        <div class="cert-year">2025</div>
+      </div>
+      <div class="cert-card">
+        <div class="cert-issuer">CISCO</div>
+        <div class="cert-name">Networking Basics</div>
+        <div class="cert-year">2025</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── EXPERIENCE ─── -->
+<section id="experience">
+  <div class="container">
+    <div class="section-label">PRACTICAL EXPERIENCE</div>
+    <h2 class="section-title">Practical Experience</h2>
+    <p class="section-sub" style="margin-bottom:1.5rem;">My engineering experience is demonstrated through independently designed and implemented projects across cloud, security, and systems domains.</p>
+    <div class="practical-grid reveal">
+      <div class="practical-item">
+        <div class="practical-item-title">Cloud Infrastructure</div>
+        <div class="practical-item-desc">Designed and provisioned a production-style multi-AZ AWS environment using Terraform IaC.</div>
+      </div>
+      <div class="practical-item">
+        <div class="practical-item-title">Security Lab Development</div>
+        <div class="practical-item-desc">Built a functioning SOC environment with Wazuh SIEM, endpoint agents, and AI alert triage.</div>
+      </div>
+      <div class="practical-item">
+        <div class="practical-item-title">Linux Administration</div>
+        <div class="practical-item-desc">Operated Arch Linux as a daily-use system; administered TrueNAS, Ubuntu servers, and service deployment.</div>
+      </div>
+      <div class="practical-item">
+        <div class="practical-item-title">Infrastructure Automation</div>
+        <div class="practical-item-desc">Used Terraform, cloud-init/UserData, and Python/Boto3 for automated provisioning and monitoring.</div>
+      </div>
+      <div class="practical-item">
+        <div class="practical-item-title">Backend Development</div>
+        <div class="practical-item-desc">Built REST APIs with Spring Data JPA and MySQL; worked with Postman for testing and validation.</div>
+      </div>
+      <div class="practical-item">
+        <div class="practical-item-title">Self-Hosted Infrastructure</div>
+        <div class="practical-item-desc">Designed and operated a home server with Nextcloud, RAID storage, LAN networking, and access control.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── GITHUB ─── -->
+<section id="github">
+  <div class="container">
+    <div class="github-inner reveal">
+      <div class="github-text">
+        <div class="section-label" style="margin-bottom:0.8rem">OPEN SOURCE &amp; CODE</div>
+        <h3 style="font-size:1.3rem;font-weight:700;color:var(--text-1);margin-bottom:0.8rem;">Explore the code behind the systems.</h3>
+        <p>I build projects to understand systems by actually implementing them. The repositories contain infrastructure configuration, Terraform modules, automation scripts, and documentation for each project.</p>
+      </div>
+      <div style="display:flex;flex-direction:column;gap:0.8rem;flex-shrink:0">
+        <a href="https://github.com/VijayJG" target="_blank" rel="noopener" class="btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          github.com/VijayJG
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CONTACT ─── -->
+<section id="contact">
+  <div class="container">
+    <div class="section-label">CONTACT</div>
+    <h2 class="section-title">Let's build something useful.</h2>
+    <p class="section-sub" style="margin-bottom:2rem;">I'm interested in opportunities involving cloud infrastructure, DevOps, cybersecurity, SOC operations, Linux systems, backend engineering, and related infrastructure roles.</p>
+
+    <div class="contact-grid reveal">
+      <div class="contact-info">
+        <a href="mailto:vijayjayagopan@gmail.com" class="contact-link">
+          <div class="contact-icon">✉</div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-3);font-family:var(--mono);margin-bottom:0.2rem">EMAIL</div>
+            vijayjayagopan@gmail.com
+          </div>
+        </a>
+        <a href="https://linkedin.com/in/vijayabalan-j" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-icon">in</div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-3);font-family:var(--mono);margin-bottom:0.2rem">LINKEDIN</div>
+            linkedin.com/in/vijayabalan-j
+          </div>
+        </a>
+        <a href="https://github.com/VijayJG" target="_blank" rel="noopener" class="contact-link">
+          <div class="contact-icon" style="font-size:1rem">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.37 0 0 5.37 0 12c0 5.31 3.435 9.795 8.205 11.385.6.105.825-.255.825-.57 0-.285-.015-1.23-.015-2.235-3.015.555-3.795-.735-4.035-1.41-.135-.345-.72-1.41-1.23-1.695-.42-.225-1.02-.78-.015-.795.945-.015 1.62.87 1.845 1.23 1.08 1.815 2.805 1.305 3.495.99.105-.78.42-1.305.765-1.605-2.67-.3-5.46-1.335-5.46-5.925 0-1.305.465-2.385 1.23-3.225-.12-.3-.54-1.53.12-3.18 0 0 1.005-.315 3.3 1.23.96-.27 1.98-.405 3-.405s2.04.135 3 .405c2.295-1.56 3.3-1.23 3.3-1.23.66 1.65.24 2.88.12 3.18.765.84 1.23 1.905 1.23 3.225 0 4.605-2.805 5.625-5.475 5.925.435.375.81 1.095.81 2.22 0 1.605-.015 2.895-.015 3.3 0 .315.225.69.825.57A12.02 12.02 0 0024 12c0-6.63-5.37-12-12-12z"/></svg>
+          </div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-3);font-family:var(--mono);margin-bottom:0.2rem">GITHUB</div>
+            github.com/VijayJG
+          </div>
+        </a>
+        <div class="contact-link" style="cursor:default">
+          <div class="contact-icon">⌖</div>
+          <div>
+            <div style="font-size:0.75rem;color:var(--text-3);font-family:var(--mono);margin-bottom:0.2rem">LOCATION</div>
+            Chennai, India
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="contact-form">
+          <div class="form-group">
+            <label class="form-label" for="name">NAME</label>
+            <input class="form-input" type="text" id="name" name="name" placeholder="Your name" autocomplete="name" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="email">EMAIL</label>
+            <input class="form-input" type="email" id="email" name="email" placeholder="your@email.com" autocomplete="email" />
+          </div>
+          <div class="form-group">
+            <label class="form-label" for="message">MESSAGE</label>
+            <textarea class="form-textarea" id="message" name="message" placeholder="Tell me about the opportunity or what you'd like to discuss."></textarea>
+          </div>
+          <button type="button" id="submitBtn" class="btn-primary" style="width:fit-content" onclick="handleFormSubmit()">Send Message</button>
+          <div class="form-notice" id="formNotice"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div>
+    <div class="footer-brand">Vijayabalan J</div>
+    <div class="footer-sub">Cloud · DevOps · Cybersecurity · Linux</div>
+  </div>
+  <div class="footer-links">
+    <a href="https://github.com/VijayJG" target="_blank" rel="noopener">GitHub</a>
+    <a href="https://linkedin.com/in/vijayabalan-j" target="_blank" rel="noopener">LinkedIn</a>
+    <a href="mailto:vijayjayagopan@gmail.com">Email</a>
+  </div>
+  <div class="footer-copy">© 2026 Vijayabalan J. All rights reserved.</div>
+</footer>
+
+
+<!-- ─── MODAL ─── -->
+<div class="modal-overlay" id="modalOverlay" role="dialog" aria-modal="true" aria-labelledby="modalTitle" onclick="closeModal(event)">
+  <div class="modal-box">
+    <button class="modal-close" onclick="closeModal()" aria-label="Close modal">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+
+<!-- ─── SCRIPT ─── -->
+<script>
+  // NAV TOGGLE
+  const navToggle = document.getElementById('navToggle');
+  const navLinks = document.getElementById('navLinks');
+  navToggle.addEventListener('click', () => {
+    const open = navLinks.classList.toggle('open');
+    navToggle.setAttribute('aria-expanded', open);
+  });
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => { navLinks.classList.remove('open'); navToggle.setAttribute('aria-expanded', false); });
+  });
+
+  // SCROLL REVEAL
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => observer.observe(r));
+
+  // PROJECT CARD keyboard
+  document.querySelectorAll('.project-card').forEach(card => {
+    card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); } });
+  });
+
+  // MODAL DATA
+  const modals = {
+    aws: {
+      title: 'Auto-Scaling Web Infrastructure on AWS',
+      badge: 'CLOUD · DEVOPS · INFRASTRUCTURE AS CODE',
+      sections: [
+        { title: 'PROBLEM', content: `<p>The project addresses how to build a realistic, production-style AWS deployment without console-clicking — using Infrastructure as Code to define every resource, automate instance provisioning, and maintain high availability across multiple availability zones. The goal was to understand how the components of a cloud architecture (networking, compute, load balancing, scaling, IAM, and monitoring) interact as an integrated system.</p>` },
+        { title: 'ARCHITECTURE', content: `<p>Internet traffic enters via an Application Load Balancer spanning ap-south-1a and ap-south-1b. The ALB forwards traffic to a Target Group backed by an Auto Scaling Group. EC2 instances are launched from a Launch Template with a UserData script. A dedicated VPC with custom subnets, internet gateway, route tables, and security groups provides the network foundation. All 15 resources are defined in Terraform.</p>` },
+        { title: 'INFRASTRUCTURE', content: `<ul class="modal-list"><li>VPC with custom CIDR</li><li>Public subnets in ap-south-1a and ap-south-1b</li><li>Internet Gateway + Route Table</li><li>Application Load Balancer</li><li>Target Group with health checks</li><li>Auto Scaling Group + Launch Template</li><li>EC2 instances (t-series, Amazon Linux 2)</li><li>Security Groups (ALB + EC2 tiers)</li><li>ASG Scaling Policy</li><li>Dedicated IAM user + AWS CLI profile</li></ul>` },
+        { title: 'AUTOMATION', content: `<p><strong>Terraform:</strong> All 15 resources defined as code. No manual console steps. Reproducible from <code>terraform apply</code>.</p><p><strong>UserData / cloud-init:</strong> On instance launch — installs Python 3, pip, Flask, virtualenv; creates systemd service unit; starts Flask application. Instances are traffic-ready in approximately 3 minutes.</p><p><strong>Python / Boto3 Monitor:</strong> Uses EC2, ASG, and ELBv2 APIs to report instance state, ASG health, and load balancer target status in real time.</p>` },
+        { title: 'SECURITY', content: `<p>Dedicated Terraform IAM user with a scoped policy — no root access used during provisioning. Separate security groups for ALB (port 80 inbound from internet) and EC2 (port 5000 inbound only from ALB security group). SSH access via key pair only. Principle of least privilege applied to IAM.</p>` },
+        { title: 'MONITORING', content: `<p>A Python script using Boto3 polls the EC2 API, ASG API, and ELBv2 API on demand to report: running instance count, instance IDs, ASG desired/in-service counts, and ALB target health state. Designed as a foundation for scheduled or event-driven monitoring.</p>` },
+        { title: 'LESSONS LEARNED', content: `<p>Working through the interconnection of IAM, VPC, and ASG revealed how many implicit dependencies exist between AWS resources. Debugging health-check failures in the Target Group was a practical lesson in security group layering. The UserData boot sequence highlighted how cloud-init executes and where failures are logged (/var/log/cloud-init-output.log).</p>` },
+      ]
+    },
+    soc: {
+      title: 'Security Operations Center Lab',
+      badge: 'CYBERSECURITY · SIEM · AI',
+      sections: [
+        { title: 'PROBLEM', content: `<p>Understanding how a SOC operates requires more than reading documentation — it requires generating real security events, seeing them reach a SIEM, and practicing how an analyst triages them. The project creates a controlled environment where real endpoint monitoring, file integrity detection, and threat event generation are all observable and analysable.</p>` },
+        { title: 'ARCHITECTURE', content: `<p>A Windows 10 endpoint runs the Wazuh agent, which forwards events over a bridged network to a Wazuh Manager deployed on Ubuntu in VMware. The Wazuh Manager processes events through its rule engine, generating alerts for authentication anomalies, integrity violations, and endpoint activity. A local Python script forwards qualifying alerts to Ollama running Llama 3.1 8B, which generates structured incident summaries.</p>` },
+        { title: 'SIEM CAPABILITIES', content: `<ul class="modal-list"><li>Real-time endpoint monitoring via Wazuh agent</li><li>File Integrity Monitoring (FIM) on critical directories</li><li>Detection of file creation, modification, and deletion events</li><li>Authentication anomaly detection</li><li>Rule-based alert generation with severity levels</li><li>Secure agent-manager communication</li></ul>` },
+        { title: 'AI INTEGRATION', content: `<p>Llama 3.1 8B runs locally via Ollama — no external API calls, no data leaving the lab environment. A Python script reads raw Wazuh alert JSON, constructs a structured prompt, and sends it to the local LLM. The model returns a structured incident summary including: event classification, affected resource, likely cause, recommended analyst action, and severity assessment.</p><p>This automates the first-pass triage step that an analyst would otherwise do manually for each alert.</p>` },
+        { title: 'LESSONS LEARNED', content: `<p>Configuring reliable communication between the Wazuh agent and manager required careful attention to network mode (bridged vs NAT) and firewall rules. FIM showed how much filesystem activity occurs on a typical Windows endpoint — prompt engineering was necessary to make the LLM produce consistently structured output, not narrative responses.</p>` },
+      ]
+    },
+    homeserver: {
+      title: 'Self-Hosted Home Server',
+      badge: 'LINUX · SYSTEM ADMINISTRATION · PRIVATE CLOUD',
+      sections: [
+        { title: 'PROBLEM', content: `<p>The project was motivated by a practical question: can you build a functional private cloud storage and NAS system using commodity hardware, open-source software, and Linux — with proper redundancy and access control? The answer required learning storage management, LAN networking, service deployment, and Linux administration as integrated disciplines rather than in isolation.</p>` },
+        { title: 'INFRASTRUCTURE', content: `<ul class="modal-list"><li>TrueNAS (FreeBSD-based) as the storage OS</li><li>RAID configuration for storage pool redundancy</li><li>Dataset structure for organised storage</li><li>Nextcloud for private cloud interface</li><li>LAN-based access via home network</li><li>Web-based administration for users and quotas</li></ul>` },
+        { title: 'ADMINISTRATION', content: `<p>User accounts were created per-device/per-person with access controls and storage quotas. Nextcloud provides file synchronisation across laptop, phone, and desktop. Storage pool health is monitored through the TrueNAS dashboard. Service configuration required understanding how BSD-based systems handle storage pools, datasets, and service permissions differently from Linux distributions.</p>` },
+        { title: 'LESSONS LEARNED', content: `<p>RAID provides redundancy — not backup. Understanding the difference between storage pools, datasets, and zvols clarified how ZFS manages data. Networking a service on a home LAN required understanding DHCP reservations and local DNS. Nextcloud's permission model required careful configuration to avoid permission errors on shared directories.</p>` },
+      ]
+    }
+  };
+
+  function openModal(key) {
+    const data = modals[key];
+    if (!data) return;
+    const content = `
+      <div style="margin-bottom:1rem">
+        <span class="project-badge${key === 'soc' ? ' security' : key === 'homeserver' ? ' linux' : ''}">${data.badge}</span>
+      </div>
+      <h2 id="modalTitle" style="font-size:1.3rem;font-weight:700;color:var(--text-1);margin-bottom:1.8rem;letter-spacing:-0.01em;">${data.title}</h2>
+      ${data.sections.map(s => `
+        <div class="modal-section">
+          <div class="modal-section-title">${s.title}</div>
+          ${s.content}
+        </div>
+      `).join('')}
+    `;
+    document.getElementById('modalContent').innerHTML = content;
+    document.getElementById('modalOverlay').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeModal(e) {
+    if (e && e.target !== document.getElementById('modalOverlay') && !e.target.classList.contains('modal-close')) return;
+    if (!e || e.target === document.getElementById('modalOverlay') || e.target.classList.contains('modal-close')) {
+      document.getElementById('modalOverlay').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  }
+
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') { document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow = ''; }
+  });
+
+  // ─── CONTACT FORM — FORMSPREE ───────────────────────────────────────────
+  // SETUP: go to https://formspree.io → sign up free → New Form → copy your
+  // form ID (looks like "xpwzabcd") → paste it below replacing YOUR_FORM_ID
+  const FORMSPREE_ID = 'YOUR_FORM_ID';
+
+  async function handleFormSubmit() {
+    const nameEl    = document.getElementById('name');
+    const emailEl   = document.getElementById('email');
+    const messageEl = document.getElementById('message');
+    const notice    = document.getElementById('formNotice');
+    const btn       = document.getElementById('submitBtn');
+
+    const name    = nameEl.value.trim();
+    const email   = emailEl.value.trim();
+    const message = messageEl.value.trim();
+
+    if (!name || !email || !message) {
+      notice.style.color = '#ef4444';
+      notice.textContent = 'Please fill in all fields before sending.';
+      return;
+    }
+
+    // If not yet configured, open mailto as fallback
+    if (FORMSPREE_ID === 'YOUR_FORM_ID') {
+      const subject = encodeURIComponent(`Portfolio enquiry from ${name}`);
+      const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
+      window.open(`mailto:vijayjayagopan@gmail.com?subject=${subject}&body=${body}`);
+      notice.style.color = 'var(--text-3)';
+      notice.textContent = 'Form not yet connected — opened your email client instead. (Add your Formspree ID to enable direct submission.)';
+      return;
+    }
+
+    // Real submission via Formspree
+    btn.textContent = 'Sending…';
+    btn.style.opacity = '0.7';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      if (res.ok) {
+        btn.textContent   = 'Message Sent ✓';
+        btn.style.opacity = '1';
+        btn.style.background = '#22c55e';
+        notice.style.color   = '#22c55e';
+        notice.textContent   = 'Message delivered — I\'ll get back to you soon.';
+        nameEl.value = ''; emailEl.value = ''; messageEl.value = '';
+      } else {
+        throw new Error('Server error');
+      }
+    } catch {
+      btn.textContent   = 'Send Message';
+      btn.style.opacity = '1';
+      btn.disabled      = false;
+      notice.style.color   = '#ef4444';
+      notice.textContent   = 'Something went wrong. Email me directly at vijayjayagopan@gmail.com';
+    }
+  }
+
+  // ─── ANIMATED NODE NETWORK BACKGROUND ───────────────────────────────────
+  (function () {
+    const canvas = document.getElementById('networkCanvas');
+    const ctx    = canvas.getContext('2d');
+
+    // Colors
+    const NODE_COLOR = 'rgba(74,158,255,';
+    const LINE_COLOR = 'rgba(74,158,255,';
+    const CYAN_COLOR = 'rgba(34,211,238,';
+
+    let W, H, nodes;
+
+    // Respect reduced-motion preference
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function resize() {
+      W = canvas.width  = window.innerWidth;
+      H = canvas.height = window.innerHeight;
+      initNodes();
+    }
+
+    function initNodes() {
+      // Fewer nodes on mobile
+      const count = W < 600 ? 28 : W < 1000 ? 48 : 70;
+      nodes = [];
+      for (let i = 0; i < count; i++) {
+        // Two "clusters" — one blue (infra), one cyan (security) — feel organic
+        const cluster = Math.random() < 0.62 ? 'infra' : 'sec';
+        const speed   = 0.12 + Math.random() * 0.22;   // very slow drift
+        nodes.push({
+          x:   Math.random() * W,
+          y:   Math.random() * H,
+          vx:  (Math.random() - 0.5) * speed,
+          vy:  (Math.random() - 0.5) * speed,
+          r:   1 + Math.random() * 1.6,               // small dots
+          cluster,
+          // breathing: each node pulses independently
+          phase:  Math.random() * Math.PI * 2,
+          pSpeed: 0.004 + Math.random() * 0.008,
+        });
+      }
+    }
+
+    const MAX_DIST = 160;   // connection threshold — keep lines sparse
+
+    function draw(ts) {
+      ctx.clearRect(0, 0, W, H);
+
+      // Update positions
+      for (const n of nodes) {
+        if (!reduceMotion) {
+          n.x += n.vx;
+          n.y += n.vy;
+          n.phase += n.pSpeed;
+
+          // Soft boundary bounce
+          if (n.x < 0)  { n.x = 0;  n.vx *= -1; }
+          if (n.x > W)  { n.x = W;  n.vx *= -1; }
+          if (n.y < 0)  { n.y = 0;  n.vy *= -1; }
+          if (n.y > H)  { n.y = H;  n.vy *= -1; }
+        }
+      }
+
+      // Draw connections first (below nodes)
+      for (let i = 0; i < nodes.length; i++) {
+        for (let j = i + 1; j < nodes.length; j++) {
+          const a = nodes[i], b = nodes[j];
+          const dx = a.x - b.x, dy = a.y - b.y;
+          const dist = Math.sqrt(dx * dx + dy * dy);
+          if (dist > MAX_DIST) continue;
+
+          const fade = 1 - dist / MAX_DIST;
+          const isCyan = a.cluster === 'sec' && b.cluster === 'sec';
+          const color  = isCyan ? CYAN_COLOR : LINE_COLOR;
+
+          // Breathing opacity on the line — follows the average phase of its two nodes
+          const breathe = 0.5 + 0.5 * Math.sin((a.phase + b.phase) / 2);
+          const alpha   = fade * 0.07 * (0.6 + 0.4 * breathe);
+
+          ctx.beginPath();
+          ctx.moveTo(a.x, a.y);
+          ctx.lineTo(b.x, b.y);
+          ctx.strokeStyle = color + alpha + ')';
+          ctx.lineWidth   = 0.6;
+          ctx.stroke();
+        }
+      }
+
+      // Draw nodes
+      for (const n of nodes) {
+        const breathe = 0.5 + 0.5 * Math.sin(n.phase);
+        const alpha   = 0.25 + 0.45 * breathe;           // gentle pulse
+        const r       = n.r * (0.85 + 0.3 * breathe);    // subtle size pulse
+        const color   = n.cluster === 'sec' ? CYAN_COLOR : NODE_COLOR;
+
+        ctx.beginPath();
+        ctx.arc(n.x, n.y, r, 0, Math.PI * 2);
+        ctx.fillStyle = color + alpha + ')';
+        ctx.fill();
+      }
+
+      requestAnimationFrame(draw);
+    }
+
+    window.addEventListener('resize', resize);
+    resize();
+    requestAnimationFrame(draw);
+  })();
+</script>
+
+</body>
+</html>
